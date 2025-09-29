@@ -9,13 +9,45 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            TripList()
+                .toolbar {
+                    ToolbarItemGroup(placement: .primaryAction) {
+                        UpButton()
+                        DownButton()
+                    }
+                    
+                    ToolbarSpacer(.fixed, placement: .primaryAction)
+                    
+                    ToolbarItem(placement: .primaryAction) {
+                        SettingsButton()
+                    }
+                }
         }
-        .padding()
+    }
+}
+
+struct TripList: View {
+    var body: some View {
+        Text("Trip List")
+    }
+}
+
+struct UpButton: View {
+    var body: some View {
+        Button("Up", systemImage: "chevron.up") { }
+    }
+}
+
+struct DownButton: View {
+    var body: some View {
+        Button("Down", systemImage: "chevron.down") { }
+    }
+}
+
+struct SettingsButton: View {
+    var body: some View {
+        Button("List Settings", systemImage: "ellipsis") { }
     }
 }
 
