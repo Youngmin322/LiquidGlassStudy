@@ -7,23 +7,60 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HealthTabView: View {
+    @State private var text: String = ""
+    
     var body: some View {
-        NavigationStack {
-            TripList()
-                .toolbar {
-                    ToolbarItemGroup(placement: .primaryAction) {
-                        UpButton()
-                        DownButton()
-                    }
-                    
-                    ToolbarSpacer(.fixed, placement: .primaryAction)
-                    
-                    ToolbarItem(placement: .primaryAction) {
-                        SettingsButton()
-                    }
+        TabView {
+            Tab("Summary", systemImage: "heart") {
+                NavigationStack {
+                    Text("Summary")
                 }
+            }
+            Tab("Sharing", systemImage: "person.2") {
+                NavigationStack {
+                    Text("Sharing")
+                }
+            }
+            Tab(role: .search) {
+                NavigationStack {
+                    Text("search")
+                }
+            }
         }
+        .searchable(text: $text)
+    }
+}
+
+struct ContentView: View {
+    @State private var query: String = ""
+    
+    var body: some View {
+        NavigationSplitView {
+            Text("Sidebar")
+        } detail: {
+            Text("Detail")
+        }
+        .searchable(
+            text: $query,
+            prompt: "Search"
+            )
+        
+//        NavigationStack {
+//            TripList()
+//                .toolbar {
+//                    ToolbarItemGroup(placement: .primaryAction) {
+//                        UpButton()
+//                        DownButton()
+//                    }
+//                    
+//                    ToolbarSpacer(.fixed, placement: .primaryAction)
+//                    
+//                    ToolbarItem(placement: .primaryAction) {
+//                        SettingsButton()
+//                    }
+//                }
+//        }
     }
 }
 
@@ -52,5 +89,5 @@ struct SettingsButton: View {
 }
 
 #Preview {
-    ContentView()
+    HealthTabView()
 }
