@@ -5,7 +5,23 @@
 //  Created by Youngmin Cho on 9/24/25.
 //
 
+import Charts
 import SwiftUI
+
+struct HikePlotView: View {
+    var body: some View {
+        Chart3D {
+            SurfacePlot(
+                x: "x", y: "y", z: "z") { x, y in
+                    sin(x) * cos(y)
+                }
+                .foregroundStyle(Gradient(colors: [.orange, .pink]))
+        }
+        .chartXScale(domain: -3 ... 6)
+        .chartYScale(domain: -3 ... 10)
+        .chartZScale(domain: -3 ... 3)
+    }
+}
 
 struct HealthTabView: View {
     @State private var text: String = ""
@@ -89,5 +105,5 @@ struct SettingsButton: View {
 }
 
 #Preview {
-    HealthTabView()
+    HikePlotView()
 }
